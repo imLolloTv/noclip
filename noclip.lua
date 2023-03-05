@@ -1,6 +1,6 @@
 RL_StatoNoclip = false 
 RL_Velocita = 1 
-RL_CameraMode = false
+RL_CameraMode = true
 RL_ListaVelocita = {
     0, 0.5, 2, 4, 6, 10, 20, 25,
 }
@@ -75,35 +75,35 @@ Citizen.CreateThread(function()
                 Suono()
             end
 
-			if IsDisabledControlPressed(0, 32) then
+            if IsDisabledControlPressed(0, 32) then
                 yoff = 0.5
-			end
+            end
 			
             if IsDisabledControlPressed(0, 33) then
                 yoff = -0.5
-			end
+            end
 			
             if IsDisabledControlPressed(0, 34) then
                 SetEntityHeading(noclipEntity, GetEntityHeading(noclipEntity)+5)
-			end
+            end
 			
             if IsDisabledControlPressed(0, 35) then
                 SetEntityHeading(noclipEntity, GetEntityHeading(noclipEntity)-5)
-			end
+            end
 			
             if IsDisabledControlPressed(0, 85) then
                 zoff = 0.2
-			end
+            end
 			
             if IsDisabledControlPressed(0, 48) then
                 zoff = -0.2
-			end
+            end
 
             if IsDisabledControlJustPressed(0, 74) then
                 RL_CameraMode = not RL_CameraMode
 
                 Suono()
-			end
+            end
 			
             local newPos = GetOffsetFromEntityInWorldCoords(noclipEntity, 0.0, yoff * (currentSpeed + 0.3), zoff * (currentSpeed + 0.3))
             local heading = GetEntityHeading(noclipEntity)
@@ -127,8 +127,6 @@ RegisterKeyMapping('noclip', "Noclip", 'keyboard', "INSERT")
 
 RegisterCommand('noclip', function()
     RL_StatoNoclip = not RL_StatoNoclip
-
-    RL_CameraMode = false
 
     if IsPedInAnyVehicle(PlayerPedId(), false) then
         noclipEntity = GetVehiclePedIsIn(PlayerPedId(), false)
